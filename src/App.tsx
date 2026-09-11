@@ -21,12 +21,18 @@ type Product = {
 
 const queryClient = new QueryClient();
 
+/** Antepone la subcarpeta de despliegue (ej. "/trade-animations-store/") a
+ *  una imagen de /public — Vite no lo hace solo para rutas escritas a mano. */
+function asset(nombreArchivo: string) {
+  return `${import.meta.env.BASE_URL}${nombreArchivo.replace(/^\//, '')}`;
+}
+
 const products: Product[] = [
-  { id: 'goku-ultra-instinct', name: 'Son Goku / Ultra Instinto', series: 'Dragon Ball Z', category: 'Dragon Ball Z', price: 129.9, image: '/starship-swordsman.png', badge: 'Más buscada' },
-  { id: 'naruto-sage-mode', name: 'Naruto / Modo Sabio', series: 'Naruto', category: 'Naruto', price: 114.9, image: '/fox-spirit.png', badge: 'Nueva llegada' },
-  { id: 'luffy-gear-five', name: 'Monkey D. Luffy / Gear 5', series: 'One Piece', category: 'One Piece', price: 159, image: '/moonlit-miko.png', badge: 'Edición especial' },
-  { id: 'gojo-limitless', name: 'Satoru Gojo / Ilimitado', series: 'Jujutsu Kaisen', category: 'Jujutsu Kaisen', price: 149.5, image: '/forest-witch.png', badge: 'Favorita' },
-  { id: 'nezuko-box', name: 'Nezuko / Caja de madera', series: 'Demon Slayer', category: 'Demon Slayer', price: 99.9, image: '/fox-spirit.png' },
+  { id: 'goku-ultra-instinct', name: 'Son Goku / Ultra Instinto', series: 'Dragon Ball Z', category: 'Dragon Ball Z', price: 129.9, image: asset('/starship-swordsman.png'), badge: 'Más buscada' },
+  { id: 'naruto-sage-mode', name: 'Naruto / Modo Sabio', series: 'Naruto', category: 'Naruto', price: 114.9, image: asset('/fox-spirit.png'), badge: 'Nueva llegada' },
+  { id: 'luffy-gear-five', name: 'Monkey D. Luffy / Gear 5', series: 'One Piece', category: 'One Piece', price: 159, image: asset('/moonlit-miko.png'), badge: 'Edición especial' },
+  { id: 'gojo-limitless', name: 'Satoru Gojo / Ilimitado', series: 'Jujutsu Kaisen', category: 'Jujutsu Kaisen', price: 149.5, image: asset('/forest-witch.png'), badge: 'Favorita' },
+  { id: 'nezuko-box', name: 'Nezuko / Caja de madera', series: 'Demon Slayer', category: 'Demon Slayer', price: 99.9, image: asset('/fox-spirit.png') },
 ];
 
 const categories: { name: Exclude<Category, 'Todas'>; count: string; number: string; className?: string }[] = [
@@ -132,7 +138,7 @@ function Home() {
             </div>
             <div className="hero-art reveal reveal-delay-2">
               <div className="hero-orb" />
-              <img className="hero-figure" src="/moonlit-miko.png" alt="Figura Kitsune Moon sobre fondo cálido" data-testid="img-hero-figure" />
+              <img className="hero-figure" src={asset('/moonlit-miko.png')} alt="Figura Kitsune Moon sobre fondo cálido" data-testid="img-hero-figure" />
               <div className="hero-side-note"><span>Selección del mes</span>La luz también<br />se colecciona.</div>
             </div>
           </div>
@@ -200,7 +206,7 @@ function Home() {
 
         <section className="section spotlight">
           <div className="page-shell spotlight-grid">
-            <div className="spotlight-art"><img className="spotlight-img" src="/starship-swordsman.png" alt="Figura de Son Goku en Ultra Instinto" data-testid="img-spotlight-figure" /></div>
+            <div className="spotlight-art"><img className="spotlight-img" src={asset('/starship-swordsman.png')} alt="Figura de Son Goku en Ultra Instinto" data-testid="img-spotlight-figure" /></div>
             <div className="spotlight-copy">
               <div className="eyebrow">Pieza destacada / Dragon Ball Z</div>
               <h2>El cielo<br />en una<br /><span style={{ color: 'hsl(var(--primary))' }}>pose.</span></h2>
