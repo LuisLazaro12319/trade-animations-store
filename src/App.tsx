@@ -28,19 +28,19 @@ function asset(nombreArchivo: string) {
 }
 
 const products: Product[] = [
-  { id: 'goku-ultra-instinct', name: 'Son Goku / Ultra Instinto', series: 'Dragon Ball Z', category: 'Dragon Ball Z', price: 129.9, image: asset('/starship-swordsman.png'), badge: 'Más buscada' },
-  { id: 'naruto-sage-mode', name: 'Naruto / Modo Sabio', series: 'Naruto', category: 'Naruto', price: 114.9, image: asset('/fox-spirit.png'), badge: 'Nueva llegada' },
-  { id: 'luffy-gear-five', name: 'Monkey D. Luffy / Gear 5', series: 'One Piece', category: 'One Piece', price: 159, image: asset('/moonlit-miko.png'), badge: 'Edición especial' },
-  { id: 'gojo-limitless', name: 'Satoru Gojo / Ilimitado', series: 'Jujutsu Kaisen', category: 'Jujutsu Kaisen', price: 149.5, image: asset('/forest-witch.png'), badge: 'Favorita' },
-  { id: 'nezuko-box', name: 'Nezuko / Caja de madera', series: 'Demon Slayer', category: 'Demon Slayer', price: 99.9, image: asset('/fox-spirit.png') },
+  { id: 'goku-ultra-instinct', name: 'Son Goku / Ultra Instinto', series: 'Dragon Ball Z', category: 'Dragon Ball Z', price: 129.9, image: asset('/goku-ultra-instinto.webp'), badge: 'Más buscada' },
+  { id: 'naruto-sage-mode', name: 'Naruto / Modo Sabio', series: 'Naruto', category: 'Naruto', price: 114.9, image: asset('/naruto-modo-sabio.jpg'), badge: 'Nueva llegada' },
+  { id: 'luffy-gear-five', name: 'Monkey D. Luffy / Gear 5', series: 'One Piece', category: 'One Piece', price: 159, image: asset('/luffy-gear-5.webp'), badge: 'Edición especial' },
+  { id: 'gojo-limitless', name: 'Satoru Gojo / Ilimitado', series: 'Jujutsu Kaisen', category: 'Jujutsu Kaisen', price: 149.5, image: asset('/gojo-ilimitado.webp'), badge: 'Favorita' },
+  { id: 'nezuko-box', name: 'Nezuko / Caja de madera', series: 'Demon Slayer', category: 'Demon Slayer', price: 99.9, image: asset('/nezuko-caja-madera.webp') },
 ];
 
-const categories: { name: Exclude<Category, 'Todas'>; count: string; number: string; className?: string }[] = [
-  { name: 'Dragon Ball Z', count: '24 piezas', number: '01', className: 'large' },
-  { name: 'Naruto', count: '18 piezas', number: '02' },
-  { name: 'One Piece', count: '21 piezas', number: '03' },
-  { name: 'Jujutsu Kaisen', count: '16 piezas', number: '04' },
-  { name: 'Demon Slayer', count: '13 piezas', number: '05' },
+const categories: { name: Exclude<Category, 'Todas'>; count: string; number: string; className?: string; fondo: string }[] = [
+  { name: 'Dragon Ball Z', count: '24 piezas', number: '01', className: 'large', fondo: asset('/fondo-dbz.jpg') },
+  { name: 'Naruto', count: '18 piezas', number: '02', fondo: asset('/fondo-naruto.jpg') },
+  { name: 'One Piece', count: '21 piezas', number: '03', fondo: asset('/fondo-one-piece.jpg') },
+  { name: 'Jujutsu Kaisen', count: '16 piezas', number: '04', fondo: asset('/fondo-jujutsu-kaisen.jpg') },
+  { name: 'Demon Slayer', count: '13 piezas', number: '05', fondo: asset('/fondo-demon-slayer.jpg') },
 ];
 
 function money(value: number) {
@@ -138,13 +138,13 @@ function Home() {
             </div>
             <div className="hero-art reveal reveal-delay-2">
               <div className="hero-orb" />
-              <img className="hero-figure" src={asset('/moonlit-miko.png')} alt="Figura Kitsune Moon sobre fondo cálido" data-testid="img-hero-figure" />
+              <img className="hero-figure" src={asset('/luffy-gear-5.webp')} alt="Figura de Monkey D. Luffy en Gear 5" data-testid="img-hero-figure" />
               <div className="hero-side-note"><span>Selección del mes</span>La luz también<br />se colecciona.</div>
             </div>
           </div>
         </section>
 
-        <div className="marquee" aria-label="Manifiesto Kitsune">
+        <div className="marquee" aria-label="Manifiesto Trade Animations">
           <div className="marquee-track">
             {[1, 2].map((copy) => (
               <div className="marquee-item" key={copy}>
@@ -162,7 +162,19 @@ function Home() {
             </div>
             <div className="category-grid">
               {categories.map((category) => (
-                <a className={`category-card ${category.className === 'large' ? 'first-card' : ''}`} href="#coleccion" key={category.name} onClick={() => { setActiveCategory(category.name); setQuery(''); }} data-testid={`link-category-${category.name.toLowerCase().replaceAll(' ', '-')}`}>
+                <a
+                  className={`category-card ${category.className === 'large' ? 'first-card' : ''}`}
+                  href="#coleccion"
+                  key={category.name}
+                  onClick={() => { setActiveCategory(category.name); setQuery(''); }}
+                  data-testid={`link-category-${category.name.toLowerCase().replaceAll(' ', '-')}`}
+                  style={{
+                    backgroundImage: `linear-gradient(180deg, rgba(20,16,16,.2), rgba(12,9,12,.8)), url(${category.fondo})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    color: '#f7f1e6',
+                  }}
+                >
                   <span className="category-number">{category.number}</span>
                   <div className="category-card-content"><span className="category-name">{category.name}</span><span className="category-count">{category.count}</span></div>
                   <ArrowRight className="category-arrow" size={18} />
@@ -206,7 +218,7 @@ function Home() {
 
         <section className="section spotlight">
           <div className="page-shell spotlight-grid">
-            <div className="spotlight-art"><img className="spotlight-img" src={asset('/starship-swordsman.png')} alt="Figura de Son Goku en Ultra Instinto" data-testid="img-spotlight-figure" /></div>
+            <div className="spotlight-art"><img className="spotlight-img" src={asset('/goku-ultra-instinto.webp')} alt="Figura de Son Goku en Ultra Instinto" data-testid="img-spotlight-figure" /></div>
             <div className="spotlight-copy">
               <div className="eyebrow">Pieza destacada / Dragon Ball Z</div>
               <h2>El cielo<br />en una<br /><span style={{ color: 'hsl(var(--primary))' }}>pose.</span></h2>
