@@ -171,13 +171,12 @@ function Home() {
           <div className="hero-grid page-shell">
             <div className="hero-copy reveal">
               <div className="eyebrow hero-kicker">Para vitrinas con carácter</div>
-              <h1>Tu próxima<br /><em>obsesión</em><br />empieza aquí.</h1>
+              <h1>Tu próxima<br /><em>pieza</em><br />te espera.</h1>
               <p className="hero-subtitle">Figuras que convierten una estantería en una escena. Seleccionadas con ojo de coleccionista, enviadas con el cuidado que merecen.</p>
               <div className="hero-actions">
                 <a className="button-primary" href="#coleccion" data-testid="link-explore-collection">Explorar colección <ArrowRight size={15} /></a>
                 <button className="button-quiet" onClick={() => document.getElementById('categorias')?.scrollIntoView({ behavior: 'smooth' })} data-testid="button-discover-animes">Ver por anime <ChevronRight size={15} /></button>
               </div>
-              <div className="hero-note"><span className="note-line" /><span><strong>01 / 05</strong> universos disponibles</span></div>
             </div>
             <div className="hero-art reveal reveal-delay-2">
               <img className="hero-figure" src={asset('/hero-gojo-cutout.png')} alt="Figura de Satoru Gojo" data-testid="img-hero-figure" />
@@ -228,7 +227,7 @@ function Home() {
         <section className="section collection" id="coleccion">
           <div className="page-shell">
             <div className="section-header">
-              <div><div className="eyebrow">La selección Kitsune</div><h2 className="section-title">Figuras por<br /><span style={{ color: 'hsl(var(--primary))' }}>anime.</span></h2></div>
+              <div><div className="eyebrow">Nuestra selección</div><h2 className="section-title">Figuras por<br /><span style={{ color: 'hsl(var(--primary))' }}>anime.</span></h2></div>
               <p className="section-intro">Busca por franquicia, guarda tus favoritas y añade a tu bolsa las piezas que ya tienen un lugar en tu estantería.</p>
             </div>
             <div className="collection-tools">
