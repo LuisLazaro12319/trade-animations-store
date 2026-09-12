@@ -30,7 +30,7 @@ function asset(nombreArchivo: string) {
 }
 
 const products: Product[] = [
-  { id: 'goku-ultra-instinct', name: 'Son Goku / Ultra Instinto', series: 'Dragon Ball Z', category: 'Dragon Ball Z', price: 129.9, image: asset('/goku-ultra-instinto.webp'), badge: 'Más buscada', material: 'Resina policromada', altura: '28 cm' },
+  { id: 'jiren-poder-total', name: 'Jiren / Poder Total', series: 'Dragon Ball Super', category: 'Dragon Ball Z', price: 139.9, image: asset('/jiren-poder-total.png'), badge: 'Más buscada', material: 'PVC / resina', altura: '29 cm' },
   { id: 'naruto-sage-mode', name: 'Naruto / Modo Sabio', series: 'Naruto', category: 'Naruto', price: 114.9, image: asset('/naruto-modo-sabio.jpg'), badge: 'Nueva llegada', material: 'PVC pintado a mano', altura: '25 cm' },
   { id: 'luffy-gear-five', name: 'Monkey D. Luffy / Gear 5', series: 'One Piece', category: 'One Piece', price: 159, image: asset('/luffy-gear-5.webp'), badge: 'Edición especial', material: 'PVC / resina', altura: '30 cm' },
   { id: 'gojo-limitless', name: 'Satoru Gojo / Ilimitado', series: 'Jujutsu Kaisen', category: 'Jujutsu Kaisen', price: 149.5, image: asset('/gojo-ilimitado.webp'), badge: 'Favorita', material: 'PVC pintado', altura: '27 cm' },
@@ -263,11 +263,11 @@ function Home() {
 
         <section className="section spotlight">
           <div className="page-shell spotlight-grid">
-            <div className="spotlight-art"><img className="spotlight-img" src={asset('/goku-ultra-instinto.webp')} alt="Figura de Son Goku en Ultra Instinto" data-testid="img-spotlight-figure" /></div>
+            <div className="spotlight-art"><img className="spotlight-img" src={asset('/jiren-poder-total.png')} alt="Figura de Jiren a máxima potencia" data-testid="img-spotlight-figure" /></div>
             <div className="spotlight-copy">
-              <div className="eyebrow">Pieza destacada / Dragon Ball Z</div>
-              <h2>El cielo<br />en una<br /><span style={{ color: 'hsl(var(--primary))' }}>pose.</span></h2>
-              <p>Son Goku en Ultra Instinto captura ese segundo suspendido antes del impacto. Resina policromada, 28 centímetros de presencia y una pieza pensada para destacar.</p>
+              <div className="eyebrow">Pieza destacada / Dragon Ball Super</div>
+              <h2>Fuerza<br />bruta<br /><span style={{ color: 'hsl(var(--primary))' }}>pura.</span></h2>
+              <p>Jiren, el guerrero más poderoso del Torneo del Poder, listo para desatar toda su fuerza. Una pieza imponente pensada para dominar cualquier estantería.</p>
               <div className="spotlight-price">{money(products[0].price)}</div>
               <button className="button-primary" onClick={() => addToCart(products[0])} data-testid="button-spotlight-add">Reservar esta pieza <ArrowRight size={15} /></button>
               <div className="spec-list"><div className="spec"><span>Anime</span><span>{products[0].series}</span></div><div className="spec"><span>Material</span><span>{products[0].material}</span></div><div className="spec"><span>Altura</span><span>{products[0].altura}</span></div></div>
