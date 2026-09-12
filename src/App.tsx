@@ -100,7 +100,7 @@ function Home() {
     if (!heroEl) return;
     const observer = new IntersectionObserver(
       ([entry]) => setNavSolid(!entry.isIntersecting),
-      { rootMargin: '-77px 0px 0px 0px', threshold: 0 },
+      { rootMargin: '-58px 0px 0px 0px', threshold: 0 },
     );
     observer.observe(heroEl);
     return () => observer.disconnect();
