@@ -98,9 +98,12 @@
 .topbar { background: hsl(var(--secondary)); color: hsl(var(--background)); }
 .topbar-inner { min-height: 31px; display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 11px; letter-spacing: .04em; }
 .topbar-dot { width: 5px; height: 5px; border-radius: 50%; background: #e8a27c; }
-.nav-wrap { position: relative; z-index: 20; background: rgba(246,242,234,.88); backdrop-filter: blur(12px); border-bottom: 1px solid hsl(var(--border)); }
+.nav-wrap { position: fixed; top: 31px; left: 0; right: 0; z-index: 20; background: transparent; border-bottom: 1px solid transparent; transition: background .3s ease, border-color .3s ease, top .3s ease; }
+.nav-wrap.nav-solid { top: 0; background: rgba(246,242,234,.92); backdrop-filter: blur(12px); border-bottom-color: hsl(var(--border)); }
+section[id] { scroll-margin-top: 90px; }
 .nav { height: 77px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; color: hsl(var(--foreground)); text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: #f7f1e6; text-decoration: none; transition: color .3s ease; }
+.nav-wrap.nav-solid .brand { color: hsl(var(--foreground)); }
 .brand-mark { width: 34px; height: 34px; border-radius: 50% 50% 45% 45%; background: hsl(var(--primary)); display: grid; place-items: center; color: hsl(var(--background)); position: relative; transform: rotate(-8deg); }
 .brand-mark::before, .brand-mark::after { content: ''; position: absolute; top: -8px; width: 12px; height: 12px; background: hsl(var(--primary)); clip-path: polygon(0 100%, 35% 0, 100% 70%); }
 .brand-mark::before { left: 3px; transform: rotate(-14deg); }
@@ -109,10 +112,14 @@
 .brand-name { font-weight: 700; letter-spacing: -.04em; font-size: 19px; }
 .brand-name i { font-style: normal; color: hsl(var(--primary)); }
 .nav-links { display: flex; gap: 28px; align-items: center; margin-left: auto; }
-.nav-link { color: hsl(var(--muted-foreground)); font-size: 12px; text-decoration: none; transition: color .2s ease; }
-.nav-link:hover { color: hsl(var(--primary)); }
+.nav-link { color: rgba(247,241,230,.85); font-size: 12px; text-decoration: none; transition: color .2s ease; }
+.nav-link:hover { color: #fff; }
+.nav-wrap.nav-solid .nav-link { color: hsl(var(--foreground)); }
+.nav-wrap.nav-solid .nav-link:hover { color: hsl(var(--primary)); }
+.nav-links.mobile-visible .nav-link { color: hsl(var(--foreground)); }
 .nav-actions { display: flex; align-items: center; gap: 8px; }
-.icon-button { width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 50%; color: hsl(var(--foreground)); background: transparent; transition: background .2s, border-color .2s, transform .2s; position: relative; }
+.icon-button { width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 50%; color: #f7f1e6; background: transparent; transition: background .2s, border-color .2s, transform .2s, color .3s ease; position: relative; }
+.nav-wrap.nav-solid .icon-button { color: hsl(var(--foreground)); }
 .icon-button:hover { background: hsl(var(--muted)); border-color: hsl(var(--border)); transform: translateY(-1px); }
 .cart-count { position: absolute; top: -2px; right: -1px; min-width: 16px; height: 16px; display: grid; place-items: center; padding: 0 4px; font: 9px var(--app-font-mono); color: hsl(var(--background)); background: hsl(var(--primary)); border-radius: 99px; }
 .mobile-menu { display: none; }
@@ -241,6 +248,11 @@
 .footer a { display: block; color: rgba(246,242,234,.7); text-decoration: none; font-size: 12px; margin: 0 0 12px; transition: color .2s; }
 .footer a:hover { color: #e8a27c; }
 .footer-bottom { border-top: 1px solid rgba(246,242,234,.14); margin-top: 45px; padding-top: 20px; display: flex; justify-content: space-between; color: rgba(246,242,234,.42); font: 9px var(--app-font-mono); letter-spacing: .08em; }
+.footer-social { display: flex; gap: 10px; margin-bottom: 4px; }
+.footer-social-icon { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(246,242,234,.25); border-radius: 50%; color: hsl(var(--background)); transition: background .2s, border-color .2s, color .2s; }
+.footer-social-tiktok:hover { background: hsl(var(--background)); border-color: hsl(var(--background)); color: hsl(var(--secondary)); }
+.footer-social-whatsapp:hover { background: #25D366; border-color: #25D366; color: #fff; }
+.bandera-bolivia { display: inline-block; vertical-align: -1px; border-radius: 2px; }
 
 .toast-message { position: fixed; z-index: 60; right: 22px; bottom: 22px; background: hsl(var(--secondary)); color: hsl(var(--background)); padding: 14px 17px; border-left: 3px solid #e8a27c; font-size: 12px; box-shadow: var(--shadow-soft); animation: toast-in .35s ease both; }
 .cart-panel-backdrop { position: fixed; inset: 0; z-index: 30; background: rgba(34,28,36,.32); animation: fade-in .2s ease both; }
