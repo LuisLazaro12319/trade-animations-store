@@ -261,9 +261,9 @@ function Home() {
           </div>
         </section>
 
-        <section className="section spotlight" style={{ backgroundImage: `url(${asset('/fondo-destacados.jpg')})` }}>
+        <section className="section spotlight">
           <div className="page-shell spotlight-grid">
-            <div className="spotlight-art"><img className="spotlight-img" src={asset('/jiren-poder-total.png')} alt="Figura de Jiren a máxima potencia" data-testid="img-spotlight-figure" /></div>
+            <div className="spotlight-art"><img className="spotlight-img" src={asset('/goku-vs-jiren.png')} alt="Estatua de Goku vs Jiren" data-testid="img-spotlight-figure" /></div>
             <div className="spotlight-copy">
               <div className="eyebrow">Pieza destacada / Dragon Ball Super</div>
               <h2>Fuerza<br />bruta<br /><span style={{ color: 'hsl(var(--primary))' }}>pura.</span></h2>
