@@ -209,15 +209,17 @@ section[id] { scroll-margin-top: 90px; }
 .editorial-art::after { content: 'FIGURES ARE SMALL WORLDS'; position: absolute; right: -42px; top: 50%; transform: rotate(90deg); color: rgba(246,242,234,.4); font: 10px var(--app-font-mono); letter-spacing: .2em; }
 .editorial-img { position: absolute; width: 83%; height: 100%; object-fit: cover; mix-blend-mode: screen; opacity: .8; left: 5%; filter: saturate(.75) contrast(1.1); }
 
-.spotlight { background: hsl(var(--background)); }
+.spotlight { position: relative; background-color: #0e0b1a; background-size: cover; background-position: center; overflow: hidden; }
+.spotlight::before { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,8,16,.88) 0%, rgba(10,8,16,.6) 32%, rgba(10,8,16,.15) 56%, rgba(10,8,16,0) 72%); }
+.spotlight .page-shell { position: relative; z-index: 1; }
 .spotlight-grid { display: grid; grid-template-columns: 1fr 1.02fr; gap: clamp(34px, 8vw, 120px); align-items: center; }
-.spotlight-art { background-color: #0e0b1a; background-size: cover; background-position: center; min-height: 510px; position: relative; overflow: hidden; display: grid; place-items: center; }
+.spotlight-art { min-height: 510px; position: relative; display: grid; place-items: center; }
 .spotlight-art::before { content: 'LIMITED'; position: absolute; top: 24px; right: 20px; font: 10px var(--app-font-mono); letter-spacing: .16em; color: hsl(var(--primary)); writing-mode: vertical-rl; }
-.spotlight-img { width: min(420px, 80%); height: auto; object-fit: contain; filter: drop-shadow(0 22px 26px rgba(0,0,0,.4)); transition: transform .55s; }
+.spotlight-img { width: min(420px, 80%); height: auto; object-fit: contain; filter: drop-shadow(0 22px 26px rgba(0,0,0,.5)); transition: transform .55s; animation: float 5s ease-in-out infinite; }
 .spotlight-art:hover .spotlight-img { transform: scale(1.04); }
 .spotlight-copy .eyebrow { color: hsl(var(--primary)); }
-.spotlight-copy h2 { font-family: var(--app-font-serif); font-size: clamp(43px, 5vw, 70px); line-height: .94; letter-spacing: -.06em; margin: 20px 0; }
-.spotlight-copy p { color: hsl(var(--muted-foreground)); font-size: 14px; line-height: 1.75; max-width: 420px; }
+.spotlight-copy h2 { font-family: var(--app-font-serif); font-size: clamp(43px, 5vw, 70px); line-height: .94; letter-spacing: -.06em; margin: 20px 0; color: #f7f1e6; }
+.spotlight-copy p { color: rgba(247,241,230,.75); font-size: 14px; line-height: 1.75; max-width: 420px; }
 .spotlight-price { font: 24px var(--app-font-mono); margin: 28px 0 23px; }
 .spec-list { margin: 34px 0 0; border-top: 1px solid hsl(var(--border)); }
 .spec { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid hsl(var(--border)); font-size: 12px; }
