@@ -124,7 +124,7 @@ function Home() {
       </header>
 
       <main>
-        <section className="hero" id="inicio">
+        <section className="hero" id="inicio" style={{ backgroundImage: `url(${asset('/hero-fondo-infinito.jpg')})` }}>
           <div className="hero-grid page-shell">
             <div className="hero-copy reveal">
               <div className="eyebrow hero-kicker">Para vitrinas con carácter</div>
@@ -137,9 +137,7 @@ function Home() {
               <div className="hero-note"><span className="note-line" /><span><strong>01 / 05</strong> universos disponibles</span></div>
             </div>
             <div className="hero-art reveal reveal-delay-2">
-              <div className="hero-orb" />
-              <img className="hero-figure" src={asset('/hero-gojo.jpg')} alt="Figura de Satoru Gojo" data-testid="img-hero-figure" />
-              <div className="hero-side-note"><span>Selección del mes</span>La luz también<br />se colecciona.</div>
+              <img className="hero-figure" src={asset('/hero-gojo-cutout.png')} alt="Figura de Satoru Gojo" data-testid="img-hero-figure" />
             </div>
           </div>
         </section>
