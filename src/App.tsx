@@ -5,7 +5,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
-import { Link, Route, Switch, useLocation, useRoute, Router as WouterRouter } from 'wouter';
+import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 type Category = 'Todas' | 'Dragon Ball Z' | 'Naruto' | 'One Piece' | 'Jujutsu Kaisen' | 'Demon Slayer';
 
@@ -16,9 +16,7 @@ type Product = {
   category: Exclude<Category, 'Todas'>;
   price: number;
   image: string;
-  fotos?: string[];
   badge?: string;
-  descripcion: string;
   material: string;
   altura: string;
 };
@@ -32,36 +30,11 @@ function asset(nombreArchivo: string) {
 }
 
 const products: Product[] = [
-  {
-    id: 'goku-ultra-instinct', name: 'Son Goku / Ultra Instinto', series: 'Dragon Ball Z', category: 'Dragon Ball Z', price: 129.9,
-    image: asset('/goku-ultra-instinto.webp'), badge: 'Más buscada',
-    descripcion: 'Son Goku en Ultra Instinto captura ese segundo suspendido antes del impacto. Una pieza pensada para destacar en cualquier vitrina.',
-    material: 'Resina policromada', altura: '28 cm',
-  },
-  {
-    id: 'naruto-sage-mode', name: 'Naruto / Modo Sabio', series: 'Naruto', category: 'Naruto', price: 114.9,
-    image: asset('/naruto-modo-sabio.jpg'), badge: 'Nueva llegada',
-    descripcion: 'Naruto en Modo Sabio, con los ojos y marcas características de esta transformación, sobre una base que recrea su presencia de combate.',
-    material: 'PVC pintado a mano', altura: '25 cm',
-  },
-  {
-    id: 'luffy-gear-five', name: 'Monkey D. Luffy / Gear 5', series: 'One Piece', category: 'One Piece', price: 159,
-    image: asset('/luffy-gear-5.webp'), badge: 'Edición especial',
-    descripcion: 'Luffy desatando su Gear 5 sobre una base de escombros y rayos, en plena acción, tal como se lo ve en el momento más icónico del arco de Egghead.',
-    material: 'PVC / resina', altura: '30 cm',
-  },
-  {
-    id: 'gojo-limitless', name: 'Satoru Gojo / Ilimitado', series: 'Jujutsu Kaisen', category: 'Jujutsu Kaisen', price: 149.5,
-    image: asset('/gojo-ilimitado.webp'), badge: 'Favorita',
-    descripcion: 'Satoru Gojo en pose de combate con su técnica Ilimitada, sobre una base de rocas fracturadas que transmite todo el poder del personaje.',
-    material: 'PVC pintado', altura: '27 cm',
-  },
-  {
-    id: 'nezuko-box', name: 'Nezuko / Caja de madera', series: 'Demon Slayer', category: 'Demon Slayer', price: 99.9,
-    image: asset('/nezuko-caja-madera.webp'),
-    descripcion: 'Nezuko en su clásica caja de madera de transporte, una de las piezas más buscadas por coleccionistas de Kimetsu no Yaiba.',
-    material: 'PVC', altura: '15 cm',
-  },
+  { id: 'goku-ultra-instinct', name: 'Son Goku / Ultra Instinto', series: 'Dragon Ball Z', category: 'Dragon Ball Z', price: 129.9, image: asset('/goku-ultra-instinto.webp'), badge: 'Más buscada', material: 'Resina policromada', altura: '28 cm' },
+  { id: 'naruto-sage-mode', name: 'Naruto / Modo Sabio', series: 'Naruto', category: 'Naruto', price: 114.9, image: asset('/naruto-modo-sabio.jpg'), badge: 'Nueva llegada', material: 'PVC pintado a mano', altura: '25 cm' },
+  { id: 'luffy-gear-five', name: 'Monkey D. Luffy / Gear 5', series: 'One Piece', category: 'One Piece', price: 159, image: asset('/luffy-gear-5.webp'), badge: 'Edición especial', material: 'PVC / resina', altura: '30 cm' },
+  { id: 'gojo-limitless', name: 'Satoru Gojo / Ilimitado', series: 'Jujutsu Kaisen', category: 'Jujutsu Kaisen', price: 149.5, image: asset('/gojo-ilimitado.webp'), badge: 'Favorita', material: 'PVC pintado', altura: '27 cm' },
+  { id: 'nezuko-box', name: 'Nezuko / Caja de madera', series: 'Demon Slayer', category: 'Demon Slayer', price: 99.9, image: asset('/nezuko-caja-madera.webp'), material: 'PVC', altura: '15 cm' },
 ];
 
 const categories: { name: Exclude<Category, 'Todas'>; count: string; number: string; className?: string; fondo: string }[] = [
@@ -112,71 +85,6 @@ function IconoWhatsApp() {
   );
 }
 
-function ProductoDetalle({ product, onAdd, onToggleFavorite, favorites, onBack }: {
-  product?: Product;
-  onAdd: (product: Product) => void;
-  onToggleFavorite: (id: string) => void;
-  favorites: string[];
-  onBack: () => void;
-}) {
-  const fotos = product ? (product.fotos && product.fotos.length > 0 ? product.fotos : [product.image]) : [];
-  const [activeFoto, setActiveFoto] = useState(0);
-
-  if (!product) {
-    return (
-      <section className="section product-detail">
-        <div className="page-shell" style={{ textAlign: 'center' }}>
-          <p className="section-intro" style={{ margin: '0 auto 20px' }}>No encontramos esa figura.</p>
-          <a href="#coleccion" className="button-primary" onClick={(event) => { event.preventDefault(); onBack(); }}>Volver a la colección</a>
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="section product-detail">
-      <div className="page-shell">
-        <a href="#coleccion" className="product-detail-back" onClick={(event) => { event.preventDefault(); onBack(); }} data-testid="link-back-collection">
-          <ChevronRight size={14} style={{ transform: 'rotate(180deg)' }} /> Volver a la colección
-        </a>
-        <div className="product-detail-grid">
-          <div>
-            <div className="product-detail-main-photo">
-              <img src={fotos[activeFoto]} alt={product.name} data-testid="img-product-detail-main" />
-            </div>
-            {fotos.length > 1 && (
-              <div className="product-detail-thumbs">
-                {fotos.map((foto, index) => (
-                  <button key={foto} className={`product-detail-thumb ${index === activeFoto ? 'active' : ''}`} onClick={() => setActiveFoto(index)} aria-label={`Ver foto ${index + 1}`} data-testid={`button-thumb-${index}`}>
-                    <img src={foto} alt="" />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="spotlight-copy">
-            <div className="eyebrow">{product.series}{product.badge ? ` · ${product.badge}` : ''}</div>
-            <h1>{product.name}</h1>
-            <p>{product.descripcion}</p>
-            <div className="spotlight-price">{money(product.price)}</div>
-            <div className="hero-actions">
-              <button className="button-primary" onClick={() => onAdd(product)} data-testid="button-detail-add">Reservar esta pieza <ArrowRight size={15} /></button>
-              <button className="button-quiet" onClick={() => onToggleFavorite(product.id)} data-testid="button-detail-favorite">
-                <Heart size={15} fill={favorites.includes(product.id) ? 'currentColor' : 'none'} /> {favorites.includes(product.id) ? 'Guardada' : 'Guardar'}
-              </button>
-            </div>
-            <div className="spec-list">
-              <div className="spec"><span>Anime</span><span>{product.series}</span></div>
-              <div className="spec"><span>Material</span><span>{product.material}</span></div>
-              <div className="spec"><span>Altura</span><span>{product.altura}</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Home() {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<Category>('Todas');
@@ -186,13 +94,8 @@ function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [toast, setToast] = useState('');
   const [navSolid, setNavSolid] = useState(false);
-  const [, setLocation] = useLocation();
-  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
-  const [matchProduct, paramsProduct] = useRoute('/producto/:id');
-  const activeProduct = matchProduct ? products.find((product) => product.id === paramsProduct?.id) : undefined;
 
   useEffect(() => {
-    if (matchProduct) { setNavSolid(true); return; }
     const heroEl = document.getElementById('inicio');
     if (!heroEl) return;
     const observer = new IntersectionObserver(
@@ -201,19 +104,9 @@ function Home() {
     );
     observer.observe(heroEl);
     return () => observer.disconnect();
-  }, [matchProduct]);
+  }, []);
 
-  useEffect(() => {
-    if (pendingScroll && !matchProduct) {
-      document.getElementById(pendingScroll)?.scrollIntoView({ behavior: 'smooth' });
-      setPendingScroll(null);
-    }
-  }, [pendingScroll, matchProduct]);
-
-  const goToSection = (id: string) => {
-    if (matchProduct) { setPendingScroll(id); setLocation('/'); }
-    else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const goToSection = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   const filteredProducts = useMemo(() => products.filter((product) => {
     const matchesCategory = activeCategory === 'Todas' || product.category === activeCategory;
@@ -250,7 +143,7 @@ function Home() {
 
       <header className={`nav-wrap ${navSolid ? 'nav-solid' : ''}`}>
         <nav className="nav page-shell" aria-label="Navegación principal">
-          <a href="#inicio" className="brand" onClick={(event) => { event.preventDefault(); if (matchProduct) setLocation('/'); else document.getElementById('inicio')?.scrollIntoView({ behavior: 'smooth' }); }} data-testid="link-home">
+          <a href="#inicio" className="brand" onClick={(event) => { event.preventDefault(); document.getElementById('inicio')?.scrollIntoView({ behavior: 'smooth' }); }} data-testid="link-home">
             <span className="brand-mark"><span>T</span></span>
             <span className="brand-name">Trade Animations</span>
           </a>
@@ -274,10 +167,6 @@ function Home() {
       </header>
 
       <main>
-        {matchProduct ? (
-          <ProductoDetalle product={activeProduct} onAdd={(product) => { addToCart(product); setCartOpen(true); }} onToggleFavorite={toggleFavorite} favorites={favorites} onBack={() => goToSection('coleccion')} />
-        ) : (
-        <>
         <section className="hero" id="inicio" style={{ backgroundImage: `url(${asset('/hero-fondo-infinito.jpg')})` }}>
           <div className="hero-grid page-shell">
             <div className="hero-copy reveal">
@@ -352,14 +241,15 @@ function Home() {
             <div className="product-grid">
               {filteredProducts.length > 0 ? filteredProducts.map((product, index) => (
                 <article className={`product-card reveal reveal-delay-${index + 1}`} key={product.id} data-testid={`card-product-${product.id}`}>
-                  <Link href={`/producto/${product.id}`} className="product-visual" data-testid={`link-product-${product.id}`}>
+                  <div className="product-visual">
                     {product.badge && <span className="product-badge">{product.badge}</span>}
-                    <button className={`product-favorite ${favorites.includes(product.id) ? 'active' : ''}`} onClick={(event) => { event.preventDefault(); toggleFavorite(product.id); }} aria-label={`Guardar ${product.name}`} data-testid={`button-favorite-${product.id}`}><Heart size={16} fill={favorites.includes(product.id) ? 'currentColor' : 'none'} /></button>
+                    <button className={`product-favorite ${favorites.includes(product.id) ? 'active' : ''}`} onClick={() => toggleFavorite(product.id)} aria-label={`Guardar ${product.name}`} data-testid={`button-favorite-${product.id}`}><Heart size={16} fill={favorites.includes(product.id) ? 'currentColor' : 'none'} /></button>
                     <img src={product.image} alt={product.name} loading="lazy" data-testid={`img-product-${product.id}`} />
-                  </Link>
+                  </div>
                   <div className="product-info">
                     <div className="product-meta">{product.series}</div>
-                    <h3 className="product-name"><Link href={`/producto/${product.id}`}>{product.name}</Link></h3>
+                    <h3 className="product-name">{product.name}</h3>
+                    <div className="product-specs" data-testid={`text-specs-${product.id}`}>{product.material} · {product.altura}</div>
                     <div className="product-bottom"><span className="product-price">{money(product.price)}</span><button className="add-button" onClick={() => addToCart(product)} data-testid={`button-add-${product.id}`}>Añadir <ShoppingBag size={13} /></button></div>
                   </div>
                 </article>
@@ -376,23 +266,18 @@ function Home() {
               <h2>El cielo<br />en una<br /><span style={{ color: 'hsl(var(--primary))' }}>pose.</span></h2>
               <p>Son Goku en Ultra Instinto captura ese segundo suspendido antes del impacto. Resina policromada, 28 centímetros de presencia y una pieza pensada para destacar.</p>
               <div className="spotlight-price">{money(products[0].price)}</div>
-              <div className="hero-actions">
-                <button className="button-primary" onClick={() => addToCart(products[0])} data-testid="button-spotlight-add">Reservar esta pieza <ArrowRight size={15} /></button>
-                <Link href={`/producto/${products[0].id}`} className="button-quiet" data-testid="link-spotlight-details">Ver detalles <ChevronRight size={15} /></Link>
-              </div>
-              <div className="spec-list"><div className="spec"><span>Anime</span><span>Dragon Ball Z</span></div><div className="spec"><span>Material</span><span>Resina policromada</span></div><div className="spec"><span>Altura</span><span>28 cm</span></div></div>
+              <button className="button-primary" onClick={() => addToCart(products[0])} data-testid="button-spotlight-add">Reservar esta pieza <ArrowRight size={15} /></button>
+              <div className="spec-list"><div className="spec"><span>Anime</span><span>{products[0].series}</span></div><div className="spec"><span>Material</span><span>{products[0].material}</span></div><div className="spec"><span>Altura</span><span>{products[0].altura}</span></div></div>
             </div>
           </div>
         </section>
-        </>
-        )}
       </main>
 
       <footer className="footer">
         <div className="page-shell">
           <div className="footer-grid">
             <div>
-              <a href="#inicio" className="brand" onClick={(event) => { event.preventDefault(); if (matchProduct) setLocation('/'); else document.getElementById('inicio')?.scrollIntoView({ behavior: 'smooth' }); }} data-testid="link-footer-home"><span className="brand-mark"><span>T</span></span><span className="brand-name">Trade Animations</span></a>
+              <a href="#inicio" className="brand" onClick={(event) => { event.preventDefault(); document.getElementById('inicio')?.scrollIntoView({ behavior: 'smooth' }); }} data-testid="link-footer-home"><span className="brand-mark"><span>T</span></span><span className="brand-name">Trade Animations</span></a>
               <p>Figuras de anime seleccionadas para que cada estantería tenga su propio universo.</p>
             </div>
             <div>
@@ -430,7 +315,6 @@ function Router() {
     <ErrorBoundary resetKey={useLocation()[0]}>
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/producto/:id" component={Home} />
         <Route component={NotFound} />
       </Switch>
     </ErrorBoundary>
