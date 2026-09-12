@@ -138,7 +138,7 @@ function Home() {
             </div>
             <div className="hero-art reveal reveal-delay-2">
               <div className="hero-orb" />
-              <img className="hero-figure" src={asset('/luffy-gear-5.webp')} alt="Figura de Monkey D. Luffy en Gear 5" data-testid="img-hero-figure" />
+              <img className="hero-figure" src={asset('/hero-gojo.jpg')} alt="Figura de Satoru Gojo" data-testid="img-hero-figure" />
               <div className="hero-side-note"><span>Selección del mes</span>La luz también<br />se colecciona.</div>
             </div>
           </div>
