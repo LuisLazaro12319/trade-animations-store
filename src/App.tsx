@@ -249,7 +249,10 @@ function Home() {
                   <div className="product-info">
                     <div className="product-meta">{product.series}</div>
                     <h3 className="product-name">{product.name}</h3>
-                    <div className="product-specs" data-testid={`text-specs-${product.id}`}>{product.material} · {product.altura}</div>
+                    <div className="product-specs" data-testid={`text-specs-${product.id}`}>
+                      <span>Material: <strong>{product.material}</strong></span>
+                      <span>Altura: <strong>{product.altura}</strong></span>
+                    </div>
                     <div className="product-bottom"><span className="product-price">{money(product.price)}</span><button className="add-button" onClick={() => addToCart(product)} data-testid={`button-add-${product.id}`}>Añadir <ShoppingBag size={13} /></button></div>
                   </div>
                 </article>
