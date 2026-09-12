@@ -46,7 +46,7 @@ const categories: { name: Exclude<Category, 'Todas'>; count: string; number: str
 ];
 
 function money(value: number) {
-  return new Intl.NumberFormat('es-BO', { style: 'currency', currency: 'BOB' }).format(value);
+  return `Bs ${new Intl.NumberFormat('es-BO', { minimumFractionDigits: 2 }).format(value)}`;
 }
 
 const WHATSAPP_NUMERO = '59162811626';
