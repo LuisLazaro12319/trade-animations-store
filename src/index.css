@@ -125,7 +125,7 @@ section[id] { scroll-margin-top: 90px; }
 .hero-kicker { display: inline-flex; align-items: center; gap: 8px; color: #e6b8bc; margin-bottom: 22px; }
 .hero-kicker::before { content: ''; width: 27px; height: 1px; background: currentColor; }
 .hero h1 { font-size: clamp(54px, 7vw, 100px); line-height: .91; letter-spacing: -.065em; margin: 0; max-width: 650px; color: #f7f1e6; }
-.hero h1 em { color: #ff8a8f; font-style: normal; }
+.hero h1 em { color: hsl(var(--primary)); font-style: normal; }
 .hero-subtitle { max-width: 415px; margin: 27px 0 30px; color: rgba(247,241,230,.72); font-size: 15px; line-height: 1.65; }
 .button-primary { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 0; padding: 14px 20px; border-radius: 5px; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-size: 12px; font-weight: 700; transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 8px 17px rgba(165, 47, 58, .18); }
 .button-primary:hover { transform: translateY(-2px); background: #8c2533; box-shadow: 0 12px 22px rgba(165, 47, 58, .25); }
@@ -291,10 +291,10 @@ section[id] { scroll-margin-top: 90px; }
   .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; padding: 12px 16px 18px; flex-direction: column; align-items: flex-start; gap: 15px; background: rgba(45, 25, 72, .96); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(247,241,230,.12); box-shadow: 0 12px 25px rgba(20,10,35,.35); }
   .nav-links.mobile-visible { display: flex; }
   .mobile-menu { display: grid; }
-  .hero-grid { display: block; }
-  .hero-copy { padding: 57px 0 20px; }
+  .hero-grid { display: flex; flex-direction: column; }
+  .hero-copy { padding: 20px 0; order: 2; }
   .hero h1 { font-size: clamp(55px, 16vw, 84px); max-width: 420px; }
-  .hero-art { min-height: 370px; }
+  .hero-art { min-height: 370px; order: 1; padding-top: 90px; }
   .hero-figure { width: 300px; }
   .hero-side-note { bottom: 24px; right: 4px; }
   .section { padding: 73px 0; }
